@@ -43,7 +43,6 @@ const textInput = ref("");
 const answer = ref("");
 
 const sendTextInput = async () => {
-  console.log(OPEN_API_KEY);
   const messages: Message[] = [
     {
       role: "system",
