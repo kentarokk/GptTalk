@@ -16,6 +16,8 @@ type Message = {
   content: string;
 };
 
+const OPEN_API_KEY: String = import.meta.env.VITE_OPEN_AI_KEY;
+
 const chatCompletion = async (
   messages: Message[]
 ): Promise<Message | undefined> => {
@@ -28,7 +30,7 @@ const chatCompletion = async (
     method: "POST",
     headers: {
       "Content-Type": "application/json",
-      Authorization: `Bearer ${"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"}`,
+      Authorization: `Bearer ${OPEN_API_KEY}`,
     },
     body,
   });
@@ -41,6 +43,7 @@ const textInput = ref("");
 const answer = ref("");
 
 const sendTextInput = async () => {
+  console.log(OPEN_API_KEY);
   const messages: Message[] = [
     {
       role: "system",
