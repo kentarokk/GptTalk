@@ -1,16 +1,40 @@
 <template>
-  <h1>Talk With GPT!!</h1>
-  <select type="number" name="index" v-model="contentData">
-    <option v-for="item in character" :value="item.content">
-      {{ item.name }}
-    </option>
-  </select>
-  <input type="text" v-model="textInput" />
-  <br />
-  <button @click="sendTextInput">Talk!!</button>
-  <br />
-  <h2>Answer</h2>
-  {{ answer }}
+  <div class="text-red-900 container mx-auto p-8">
+    <div class="text-3xl p-8 items-center text-center">
+      <h1 class="underline decoration-solid">ChatGPT</h1>
+    </div>
+    <div class="flex flex-col text-center mb-8">
+      <p class="mb-2">お喋りの相手は・・・</p>
+      <select
+        class="text-center px-4 py-2 rounded-lg bg-red-100"
+        type="number"
+        name="index"
+        v-model="contentData"
+      >
+        <option v-for="item in character" :value="item.content">
+          {{ item.name }}
+        </option>
+      </select>
+    </div>
+    <div class="flex justify-center mb-8">
+      <textarea
+        class="bg-gray-100 w-10/12 h-40 mr-2 border border-red-200 text-gray-900 text-sm rounded-lg focus:ring-red-500 focus:border-red-500 p-4"
+        placeholder="話したいことを入れてね！"
+        type="text"
+        v-model="textInput"
+      />
+      <button
+        class="bg-red-300 w-2/12 hover:bg-red-400 text-white font-bold rounded-lg"
+        @click="sendTextInput"
+      >
+        Talk!!
+      </button>
+    </div>
+    <div>
+      <h2 class="text-xl underline decoration-solid">お返事</h2>
+      <p class="bg-red-100 rounded-xl py-2 px-4">{{ answer }}</p>
+    </div>
+  </div>
 </template>
 
 <script setup lang="ts">
