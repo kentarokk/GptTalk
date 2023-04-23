@@ -9,5 +9,5 @@ export default defineConfig({
     port: 8080,
   },
   plugins: [vue(), tsConfigPaths()],
-  base: 'GptTalk',
+  base: '/GptTalk/',
 });
