@@ -6,9 +6,11 @@
   "scripts": {
     "dev": "vite",
     "build": "vue-tsc && vite build",
-    "preview": "vite preview"
+    "preview": "vite preview",
+    "deploy": "npm run build && gh-pages -d build -m \"Updates --skip-ci\""
   },
   "dependencies": {
+    "gh-pages": "^5.0.0",
     "vue": "^3.2.47",
     "vue-router": "^4.1.6"
   },
