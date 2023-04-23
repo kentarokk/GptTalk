@@ -25,7 +25,7 @@
       />
       <button
         class="bg-red-300 w-2/12 hover:bg-red-400 text-white font-bold rounded-lg"
-        @click="sendTextInput"
+        @click="sendMessage"
       >
         Talk!!
       </button>
@@ -47,15 +47,15 @@ type Message = {
 
 const OPEN_API_KEY: String = import.meta.env.VITE_OPEN_AI_KEY;
 
-const chatCompletion = async (
+const postMessage = async (
   messages: Message[]
-): Promise<Message | undefined> => {
+): Promise<string> => {
   const body = JSON.stringify({
     messages,
     model: "gpt-3.5-turbo",
   });
 
-  const res = await fetch("https://api.openai.com/v1/chat/completions", {
+  const response = await fetch("https://api.openai.com/v1/chat/completions", {
     method: "POST",
     headers: {
       "Content-Type": "application/json",
@@ -63,9 +63,9 @@ const chatCompletion = async (
     },
     body,
   });
-  const data = await res.json();
+  const data = await response.json();
   const choice = 0;
-  return data.choices[choice];
+  return data.choices[choice].message.content;
 };
 
 const textInput = ref("");
@@ -112,7 +112,7 @@ const character = [
   },
 ];
 
-const sendTextInput = async () => {
+const sendMessage = async () => {
   const messages: Message[] = [
     {
       role: "system",
@@ -123,8 +123,7 @@ const sendTextInput = async () => {
       content: textInput.value,
     },
   ];
-  const res = await chatCompletion(messages);
-  answer.value = res.message.content ?? "";
+  answer.value = await postMessage(messages);
 };
 </script>
 
